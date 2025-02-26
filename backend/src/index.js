@@ -3,6 +3,7 @@ import lumie from 'lumie'
 import dotenv from 'dotenv'
 import express from 'express'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import exceptionHandler from './middlewares/exception-handler'
 import { connectDatabase } from './config/database'
 ;(async function () {
@@ -21,10 +22,11 @@ import { connectDatabase } from './config/database'
      * enable cors for express app
      */
     const cors = require('cors')({
-        origin: true,
+        origin: '*', // Frontend URL
+        credentials: true,
     })
-    app.use(cors)
 
+    app.use(cors)
     /**
      * parse the form data from body using body parser
      */
@@ -33,6 +35,8 @@ import { connectDatabase } from './config/database'
             extended: true,
         })
     )
+
+    app.use(cookieParser())
 
     /**
      * parse the json from body using body parser

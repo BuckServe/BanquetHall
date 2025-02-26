@@ -22,6 +22,8 @@ const userSchema = new mongoose.Schema(
             minLength: [6, 'Your password must be longer than 6 characters'],
             select: false,
         },
+        resetPasswordToken: String,
+        resetPasswordExpire: Date,
     },
     { timestamps: true }
 )

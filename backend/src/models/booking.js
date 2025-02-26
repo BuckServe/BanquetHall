@@ -16,6 +16,9 @@ const bookingSchema = new mongoose.Schema({
         required: [true, 'Please enter your name'],
         maxLength: [50, 'Your name cannot exceed 50 characters'],
     },
+    eventType: {
+        type: String,
+    },
     bookedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

@@ -12,6 +12,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact.jsx";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
+import Login from "./pages/Login.jsx";
+import Booking from "./pages/Booking.jsx";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
       <Route path="/about" element={<About />} />
       <Route path="/gallery" element={<Gallery />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/admin/login" element={<Login />} />
+      <Route path="/admin" element={<Booking />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );
