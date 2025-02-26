@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* src/components/Calendar.css */
+.calendar-container {
+    max-width: 300px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .react-calendar {
+    border: none;
+    font-family: Arial, sans-serif;
+  }
+  
+  .react-calendar__tile {
+    border-radius: 50%;
+    padding: 10px;
+    transition: background 0.3s;
+  }
+  
+  .react-calendar__tile:hover {
+    background: #e0e0e0;
+  }
+  
+  .react-calendar__tile:enabled:focus {
+    background: #c0c0c0;
+  }
+  
+  .react-calendar__month-view__days__day--neighboringMonth {
+    color: #ccc;
+  }
+  
+  .today {
+    background: #0066ff;
+    color: white;
+    border-radius: 50%;
+  }
+  
+  .booked {
+    background: #e54a3e;
+    color: white;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .partially-booked {
+    background: #ffa500;
+    color: white;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
