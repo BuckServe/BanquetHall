@@ -9,13 +9,15 @@ const Header = () => {
   };
   return (
     <div
-      className="relative w-full h-[500px] lg:h-[500px] md:h-[500px]  bg-cover bg-center font-sans"
+      className="relative w-full h-[600px] lg:h-[600px] md:h-[600px]  bg-cover bg-center font-sans"
       style={{ backgroundImage: `url(${banner})` }}
     >
       <Navbar />
-      <div className="absolute bottom-24 left-20 flex flex-col gap-12 items-start justify-center text-white font-sans">
+      <div className="absolute bottom-10 left-20 flex flex-col gap-12 items-start justify-center text-white font-sans">
+      {/* text-[3rem] font-sans font-extrabold  text-gray-800 mb-6 text-center */}
         <h1 className="flex flex-col font-medium text-[4.3rem]/[4.3rem]">
-          FOUR <span>SEASON</span>
+          <span className="font-sans  text-gray-800">FOUR</span> 
+          <span>SEASON</span>
           <span className="forn-bold">EVENTS</span>
         </h1>
         <button

@@ -24,6 +24,9 @@ module.exports = {
         gray: "#707070",
         lightgray: "#BDBDBD",
         cream: "#EFDD8D",
+        'cream-dark': '#DBCA7A', // Add this line for a darker shade of cream
+        'black-800': '#1a1a1a',
+        'black-900': '#0d0d0d',
       },
       animation: {
         spin: "spin 1.2s linear infinite",

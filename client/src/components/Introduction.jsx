@@ -3,7 +3,7 @@ import React from "react";
 const Introduction = () => {
   return (
     <div className="px-32 lg:px-60 py-20 font-sans">
-      <h1 className="text-[2rem] font-bold text-gray-800 mb-6 text-center">
+      <h1 className="text-[3rem] font-sans font-extrabold  text-gray-800 mb-6 text-center">
         ABOUT
       </h1>
       <p className="m-auto text-center text-2xl font-medium">
