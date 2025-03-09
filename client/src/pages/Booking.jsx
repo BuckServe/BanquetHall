@@ -5,7 +5,25 @@ import {  useGetHallsQuery } from "../redux/api/hallApi";
 
 const Booking = () => {
   const { data, isLoading } = useGetHallsQuery();
+  
 
+  const [customerDetails, setCustomerDetails] = useState({
+    customerName: '',
+    customerContactNumber: '',
+    customerCNIC: ''
+  });
+  const [paymentDetails, setPaymentDetails] = useState({
+    totalAmount: 0,
+    advanceAmount:0
+  })
+  const [eventDetails, setEventDetails] = useState({
+    hallId: '',
+    eventType: '',
+    eventDate: '',
+    eventTime:'',
+    capacity:'',
+  })
+  
   const [eventTime, setEventTime] = useState("day");
   const [halls, setHalls] = useState([]);
   const [selectedHall, setSelectedHall] = useState('');
@@ -15,7 +33,6 @@ const Booking = () => {
     setHalls(data?.halls)
   }, [data]);
 
-console.log(halls)
   const hadleSubmit = (event) => {
     event.preventDefault();
   };
@@ -78,8 +95,9 @@ console.log(halls)
               </div>
               <div className=" flex gap-3 p-3 items-center rounded-2xl box-border lg:w-[15rem] lg:h-[4.25rem] bg-lightgray">
                 <input
-                  type="select"
+                  type="input"
                   placeholder="Event Type"
+                  value={eventDetails?.eventType}
                   className="w-full h-full border-none outline-none bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
                 />
                 </div>
@@ -87,8 +105,8 @@ console.log(halls)
                  <select
                     id="event_type"
                     className="p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    value={eventTime}
-                    onChange={(e) => setEventTime(e.target.value)}
+                    value={eventDetails?.eventTime}
+                    onChange={(e) => setEventDetails({...eventDetails,eventTime: e.target.value})}
                   >
                     <option value="day">Day</option>
                     <option value="night">Night</option>
@@ -96,10 +114,10 @@ console.log(halls)
               </div>
               <div className=" flex gap-3 p-3 items-center rounded-2xl box-border lg:w-[15rem] lg:h-[4.25rem] bg-lightgray">
                  <select
-                    id="event_type"
+                    id="hall-id"
                     className="p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    value={selectedHall}
-                    onChange={(e) => setSelectedHall(e.target.value)}
+                    value={eventDetails?.hallId}
+                    onChange={(e) => setEventDetails({...eventDetails, hallId:e.target.value})}
                   >
                     <option value="" disabled>
                       Select hall
