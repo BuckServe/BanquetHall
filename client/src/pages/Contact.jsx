@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
@@ -11,27 +12,20 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbyQciCA9beHqxnM44u_DXqRC4amVQVhLnZhWBeiB7yMu9eefrjwUrAa_wx1YHP6iqkFzA/exec", // Replace with your Web App URL
+      await emailjs.send(
+        'service_f1tgi2d',
+        'template_oo3qlm9',
+        formData,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
+          publicKey: 'IXcoT1wPUz9NP8MYD',
+        },
       );
-
-      const result = await response.json();
-      if (result.status === "success") {
-        alert("Message Sent Successfully!");
-        setSuccess(true);
-      } else {
-        alert("Something went wrong!");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to send message.");
+      setSuccess(true)
+      setFormData({ name: "", email: "", phone: "", message: "" })
+    } catch (err) {    
+      console.log('ERROR', err);
     }
   };
 
