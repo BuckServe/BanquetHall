@@ -6,7 +6,7 @@ const categories = [
   { id: 1, name: "HOME", path: "/home" },
   { id: 2, name: "GALLERY", path: "/gallery" },
   { id: 3, name: "ABOUT US", path: "/about" },
-  { id: 4, name: "CONTACT US", path: "/contact" },
+  { id: 4, name: "REQUEST A QUOTE", path: "/contact" },
 ];
 
 const Navbar = () => {

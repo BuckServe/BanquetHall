@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import banner from "../constants/photos/bannerImage.jpeg";
-import BookNowForm from "./BookNowForm";
+// import BookNowForm from "./BookNowForm";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
-  const [showForm, setShowForm] = useState(false);
-  const toggleForm = () => {
-    setShowForm(!showForm);
+  // const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate();
+
+  // const toggleForm = () => {
+  //   setShowForm(!showForm);
+  // };
+
+  const handleButtonClick = () => {
+    navigate("/contact");
   };
+
   return (
     <div
       className="relative w-full h-[600px] lg:h-[600px] md:h-[600px]  bg-cover bg-center font-sans"
@@ -21,12 +30,12 @@ const Header = () => {
           <span className="forn-bold">EVENTS</span>
         </h1>
         <button
-          onClick={toggleForm}
+          onClick={handleButtonClick}
           className="w-[13rem] h-[3rem] backdrop-blur-[0.5rem]"
         >
-          BOOK NOW
+          REQUEST A QUOTE
         </button>
-        <BookNowForm toggleForm={toggleForm} showForm={showForm} />
+        {/* <BookNowForm toggleForm={toggleForm} showForm={showForm} /> */}
       </div>
     </div>
   );

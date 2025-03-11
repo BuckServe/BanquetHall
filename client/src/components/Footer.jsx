@@ -51,7 +51,7 @@ const Footer = () => {
           to="/contact"
           className="htext-[1rem] font-sans text-white hover:text-gray"
         >
-          Contact Us
+          Request a Quote
         </Link>
       </div>
     </footer>
