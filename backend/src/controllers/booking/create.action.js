@@ -1,10 +1,11 @@
 import Booking from '../../models/booking.js'
 import translate from '../../helpers/translate'
+import mongoose from 'mongoose'
 
 export const create = async (request, response) => {
     const booking = await Booking.findOne({
-        eventDate: request.body,
-        hallId: request.body.hallId,
+        eventDate: request.body.eventDate,
+        hallId: new mongoose.Types.ObjectId(request.body.hallId),
         eventTime: request.body.eventTime,
     })
 
@@ -16,7 +17,10 @@ export const create = async (request, response) => {
         })
     }
 
+    request.body.bookedBy = request?.user?._id
+
     await Booking.create(request.body)
+
     /* send success response*/
     response.json({
         message: translate('messages', 'success', {

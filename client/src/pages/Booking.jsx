@@ -2,39 +2,42 @@ import React, {useState, useEffect} from "react";
 import { BsCalendar2Fill } from "react-icons/bs";
 import { MdGroups } from "react-icons/md";
 import {  useGetHallsQuery } from "../redux/api/hallApi";
+import {  useCreateBookingMutation } from "../redux/api/bookingApi";
 
 const Booking = () => {
   const { data, isLoading } = useGetHallsQuery();
   
-
-  const [customerDetails, setCustomerDetails] = useState({
-    customerName: '',
-    customerContactNumber: '',
-    customerCNIC: ''
-  });
-  const [paymentDetails, setPaymentDetails] = useState({
-    totalAmount: 0,
-    advanceAmount:0
-  })
   const [eventDetails, setEventDetails] = useState({
+    customerName: '',
+    customerPhoneNumber: '',
+    customerCNIC: '',
+    totalAmount: 0,
+    advanceAmount:0, 
     hallId: '',
     eventType: '',
     eventDate: '',
     eventTime:'',
     capacity:'',
   })
+
+  const [createBooking, { isLoading: isCreating, error, isSuccess }] = useCreateBookingMutation();
+
   
-  const [eventTime, setEventTime] = useState("day");
   const [halls, setHalls] = useState([]);
-  const [selectedHall, setSelectedHall] = useState('');
 
   
   useEffect(() => {
     setHalls(data?.halls)
   }, [data]);
 
-  const hadleSubmit = (event) => {
+  const hadleSubmit = async (event) => {
     event.preventDefault();
+    await createBooking(eventDetails)
+  };
+
+  
+  const onChange = (e) => {
+      setEventDetails({ ...eventDetails, [e.target.name]: e.target.value });
   };
 
   return (
@@ -56,13 +59,20 @@ const Booking = () => {
                 type="text"
                 placeholder="Customer Name"
                 className="w-full h-full border-none outline-none flex p-3 items-center rounded-2xl box-border bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
-              />
+                name="customerName"
+                value={eventDetails?.customerName}
+                onChange={onChange}
+             
+             />
             </div>
             <div className="lg:w-[31rem] lg:h-[4.25rem] rounded-2xl">
               <input
                 type="text"
                 placeholder="Customer CNIC"
                 className="w-full h-full border-none outline-none flex p-3 items-center rounded-2xl box-border bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
+                name="customerCNIC"
+                value={eventDetails?.customerCNIC}
+                onChange={onChange}
               />
             </div>
             <div className="lg:w-[31rem] lg:h-[4.25rem] rounded-2xl">
@@ -70,6 +80,9 @@ const Booking = () => {
                 type="text"
                 placeholder="Customer Contact Number"
                 className="w-full h-full border-none outline-none flex p-3 items-center rounded-2xl box-border bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
+                name="customerPhoneNumber"
+                value={eventDetails?.customerPhoneNumber}
+                onChange={onChange}
               />
             </div>
             <div className="text-gray font-medium">
@@ -83,6 +96,9 @@ const Booking = () => {
                   type="date"
                   placeholder="Select a date"
                   className="w-full h-full border-none outline-none bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem] appearance-none"
+                  name="eventDate"
+                  value={eventDetails?.eventDate}
+                  onChange={onChange}
                 />
               </div>
               <div className=" flex gap-3 p-3 items-center rounded-2xl box-border lg:w-[15rem] lg:h-[4.25rem] bg-lightgray">
@@ -91,13 +107,18 @@ const Booking = () => {
                   type="text"
                   placeholder="People"
                   className="w-full h-full border-none outline-none bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
+                  name="capacity"
+                  value={eventDetails?.capacity}
+                  onChange={onChange}
                 />
               </div>
               <div className=" flex gap-3 p-3 items-center rounded-2xl box-border lg:w-[15rem] lg:h-[4.25rem] bg-lightgray">
                 <input
                   type="input"
                   placeholder="Event Type"
+                  name="eventType"
                   value={eventDetails?.eventType}
+                  onChange={onChange}
                   className="w-full h-full border-none outline-none bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
                 />
                 </div>
@@ -140,6 +161,9 @@ const Booking = () => {
                 type="number"
                 placeholder="Total Amount"
                 className="w-full h-full border-none outline-none flex p-3 items-center rounded-2xl box-border bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
+                name="totalAmount"
+                value={eventDetails?.totalAmount}
+                onChange={onChange}
               />
             </div>
             <div className="lg:w-[31rem] lg:h-[4.25rem] rounded-2xl">
@@ -147,6 +171,9 @@ const Booking = () => {
                 type="number"
                 placeholder="Advance Amount"
                 className="w-full h-full border-none outline-none flex p-3 items-center rounded-2xl box-border bg-lightgray focus:bg-lightgray placeholder:text-gray placeholder:font-medium placeholder:text-[1.2rem]"
+                name="advanceAmount"
+                value={eventDetails?.advanceAmount}
+                onChange={onChange}
               />
             </div>
             <div className=" flex m-auto p-3 items-center rounded-2xl box-border lg:w-[15rem] lg:h-[4.25rem] bg-cream">
